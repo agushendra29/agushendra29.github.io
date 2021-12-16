@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS only -->
+  <link href="bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Include stylesheet -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+  <title>Home</title>
+</head>
+
+<body>
+  <div class="row dashboard">
+    <div class="col-2 header-dashboard">
+      <div class="row">
+        <div class="col">
+          <div class="row logo-dashboard">
+            <div class="col">
+              <img class="logo" src="assets/3588306944.png" alt="" />
+              <div>SD INPRES ENDE 7</div>
+            </div>
+          </div>
+          <div class="row user-dashboard">
+            <div class="col">
+              Yohanes <br />
+              @admin
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row menu-dashboard">
+        <ul>
+          <li class="dashboard-item">
+            <a href="/dashboard.html">
+              <img src="assets/pngegg.png" class="icon" alt="icon-beranda" />
+              Beranda
+            </a>
+          </li>
+          <li class="dashboard-item">
+            <a href="#" onclick="toggleProfil()">
+              <img src="assets/pngegg (4).png" class="icon" alt="icon-profil" />Profil
+            </a>
+            <ul id="dropdown-profil">
+              <li>
+                <a href="/form-tentang-kami.html">
+                  <img src="assets/pngegg (11).png" class="icon" alt="icon-tentang-kami" />
+                  Tentang Kami
+                </a>
+              </li>
+              <li>
+                <a href="form-visi-misi.html">
+                  <img src="assets/pngegg (12).png" class="icon" alt="icon-visi-misi" />
+                  Visi & Misi
+                </a>
+              </li>
+              <li>
+                <a href="form-fasilitas.html">
+                  <img src="assets/pngegg (14).png" class="icon" alt="icon-fasilitas" />
+                  Fasilitas
+                </a>
+              </li>
+              <li>
+                <a href="form-tata-tertib.html">
+                  <img src="assets/pngegg (13).png" class="icon" alt="icon-tata-tertib" />
+                  Tata Tertib
+                </a>
+              </li>
+              <li>
+                <a href="form-prestasi.html">
+                  <img src="assets/pngegg (15).png" class="icon" alt="icon-prestasi" />
+                  Prestasi
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dashboard-item">
+            <a href="/form-data-guru.html">
+              <img src="assets/pngegg (5).png" class="icon" alt="icon-guru" />Guru
+            </a>
+          </li>
+          <li class="dashboard-item">
+            <a href="/form-data-wali-kelas.html">
+              <img src="assets/pngegg (9).png" class="icon" alt="icon-wali-kelas" />Wali Kelas
+            </a>
+          </li>
+          <li class="dashboard-item">
+            <a href="#">
+              <img src="assets/pngegg (8).png" class="icon" alt="icon-wali-murid" />Wali Murid
+            </a>
+          </li>
+          <li class="dashboard-item">
+            <a href="/form-data-siswa.html">
+              <img src="assets/pngegg (7).png" class="icon" alt="icon-siswa" />Siswa
+            </a>
+          </li>
+          <li class="dashboard-item">
+            <a href="#" onclick="toggleAkademik()">
+              <img src="assets/pngegg (10).png" class="icon" alt="icon-akademik" />Akademik
+            </a>
+            <ul id="dropdown-akademik">
+              <li>
+                <a href="/form-data-siswa.html">
+                  <img src="assets/icons8-user-account-30.png" class="icon" alt="icon-daftar-siswa" />
+                  Daftar Siswa
+                </a>
+              </li>
+              <li>
+                <a href="form-data-kelulusan.html">
+                  <img src="assets/icons8-list-60.png" class="icon" alt="icon-kelulusan" />
+                  Daftar Kelulusan
+                </a>
+              </li>
+              <li>
+                <a href="form-data-alumni.html">
+                  <img src="assets/icons8-user-groups-50.png" class="icon" alt="icon-alumni" />
+                  Daftar Alumni
+                </a>
+              </li>
+              <li>
+                <a href="form-data-nilai.html">
+                  <img src="assets/icons8-list-view-24.png" class="icon" alt="icon-nilai" />
+                  Daftar Nilai
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-10 tentang-kami-dashboard">
+      <form action="">
+        <div>
+          <h3>Data Wali Kelas</h3>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <button class="button button-secondary" onclick="location.href='/form-tambah-data-wali-kelas.html';"
+              type="button">
+              <img src="assets/icons8-add-24.png" alt="" class="icon" /> Data
+              Wali Kelas
+            </button>
+          </div>
+          <div class="col-6" style="text-align: right">
+            <button class="button button-secondary">
+              <img src="assets/icons8-refresh-30.png" alt="" class="icon" />
+              Refresh
+            </button>
+          </div>
+        </div>
+        <div>
+          <table class="table table-striped table-light">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Kelas</th>
+                <th scope="col">Opsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Guru 1</td>
+                <td>III A</td>
+                <td>
+                  <a href="#"><img src="assets/icons8-edit-24.png" alt="" class="icon" /></a><a href="#"><img
+                      src="assets/icons8-remove-24.png" alt="" class="icon" style="margin-left: 12px" /></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>

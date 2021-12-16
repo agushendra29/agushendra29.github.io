@@ -1,0 +1,242 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: white;
+  background-color: #144c80;
+}
+
+.home {
+  padding: 48px;
+}
+
+.header {
+  padding: 0 20px;
+}
+
+.logo {
+  width: 160px;
+}
+
+.home-img {
+  padding: 20px 0;
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+}
+
+.navbar {
+  list-style: none;
+  display: flex;
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.nav-content a {
+  color: black !important;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.nav-content a:hover {
+  background-color: #ddd;
+}
+
+.nav-profil:hover .profil-content {
+  display: block;
+}
+
+.nav-akademik:hover .akademik-content {
+  display: block;
+}
+
+.home-title {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.header-login {
+  text-align: center;
+}
+
+.header-login * {
+  padding-bottom: 24px;
+}
+
+.login-card {
+  text-align: center;
+  background-color: whitesmoke;
+  margin: 0 25%;
+  height: 360px;
+  padding: 80px;
+}
+
+.icon {
+  width: 24px;
+}
+
+.input-login {
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.field {
+  padding: 8px;
+}
+
+.login-submit {
+  width: 360px;
+  margin-top: 18px;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.button {
+  color: white;
+  border: none;
+  padding: 4px 12px;
+}
+
+.button-primary {
+  background-color: #87aca3;
+}
+
+.button-secondary {
+  background-color: #0c1446;
+}
+
+.dashboard {
+  height: 100%;
+}
+
+.header-dashboard {
+  background-color: #2b7c85;
+}
+
+.logo-dashboard {
+  text-align: center;
+}
+
+.user-dashboard {
+  padding: 18px;
+}
+
+.menu-dashboard {
+  padding-left: 15px;
+  background-color: #87aca3;
+  height: 100%;
+}
+
+.menu-dashboard ul li {
+  padding: 12px 18px;
+  color: black;
+  font-size: 24px;
+}
+
+.menu-dashboard ul li .icon {
+  padding-right: 8px;
+  padding-bottom: 4px;
+  width: 32px;
+}
+
+.home-icon {
+  width: 128px;
+  border: 2px solid black;
+  margin-bottom: 24px;
+}
+
+.main-dashboard {
+  text-align: center;
+  padding: 96px;
+}
+
+.greetings {
+  background-color: #0c1446;
+  padding-top: 12px;
+  height: 48px;
+  margin-bottom: 48px;
+}
+
+.tentang-kami-dashboard {
+  padding: 48px 96px;
+}
+
+.tentang-kami-dashboard > form > div {
+  margin-bottom: 24px;
+}
+
+.rtf-editor .ql-snow {
+  background-color: white;
+  color: black;
+}
+
+.div-kelas {
+  background-color: #1e3d58;
+  margin: 20px;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
+
+.kontak-area {
+  color: white;
+  padding: 96px;
+  background-color: #2b7c85;
+}
+
+.dashboard-item a {
+  text-decoration: none;
+  color: black;
+}
+
+#dropdown-profil {
+  display: none;
+  list-style: none;
+}
+
+#dropdown-akademik {
+  display: none;
+  list-style: none;
+}
+
+.show {
+  display: block !important;
+}
+
+.kritik-saran-area {
+  padding: 48px;
+  background-color: #2b7c85;
+}
+
+.textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+}
+
+.table-light {
+  color: black;
+}
