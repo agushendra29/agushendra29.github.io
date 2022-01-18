@@ -8,69 +8,97 @@
     <!-- CSS only -->
     <link href="bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <title>Home</title>
 </head>
 
 <body>
     <div class="home">
-        <div class="header row">
-            <div class="col-4">
-                <div class="row">
-                    <div class="col-5">
-                        <img class="logo" src="assets/3588306944.png" alt="" />
-                    </div>
-                    <div class="col" style="margin: auto">
-                        <h2>Acara</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <div class="col">
-                        <ul class="navbar">
-                            <li><a href="./index.html">Beranda</a></li>
-                            <li class="nav-profil">
-                                <a>Profil</a>
-                                <div class="nav-content profil-content">
-                                    <a href="./tentang-kami.html">Tentang Kami</a>
-                                    <a href="./visi-misi.html">Visi & Misi</a>
-                                    <a href="./fasilitas.html">Fasilitas</a>
-                                    <a href="./tata-tertib.html">Tata Tertib</a>
-                                    <a href="./prestasi.html">Prestasi</a>
-                                </div>
-                            </li>
-                            <li class="nav-akademik">
-                                <a href="#">Akademik</a>
-                                <div class="nav-content akademik-content">
-                                    <a href="./daftar-siswa.html">Daftar Siswa</a>
-                                    <a href="./daftar-kelulusan.html">Daftar Kelulusan</a>
-                                    <a href="./daftar-alumni.html">Daftar Alumni</a>
-                                    <a href="./#">Daftar Nilai</a>
-                                </div>
-                            </li>
-                            <li><a href="./berita.html">Berita</a></li>
-                            <li><a href="./acara.html">Acara</a></li>
-                            <li><a href="./galeri.html">Galeri</a></li>
-                            <li><a href="./kritik-saran.html">Kritik & Saran</a></li>
-                            <li><a href="./kontak.html">Kontak</a></li>
-                            <li><a href="./login.html">Login</a></li>
-                        </ul>
-                    </div>
+        <div class="col-12">
+            <div class="row navclass" style="padding:0px 40px">
+                <div class="col">
+                    <ul class="navbar" style="margin-bottom: 0px;">
+                        <li><a href="./index.html">Beranda</a></li>
+                        <li class="nav-profil">
+                            <a>Profil</a>
+                            <div class="nav-content profil-content">
+                                <a href="./tentang-kami.html">Tentang Kami</a>
+                                <a href="./visi-misi.html">Visi & Misi</a>
+                                <a href="./fasilitas.html">Fasilitas</a>
+                                <a href="./tata-tertib.html">Tata Tertib</a>
+                                <a href="./prestasi.html">Prestasi</a>
+                            </div>
+                        </li>
+                        <li class="nav-akademik">
+                            <a>Akademik</a>
+                            <div class="nav-content akademik-content">
+                                <a href="./daftar-siswa.html">Daftar Siswa</a>
+                                <a href="./daftar-kelulusan.html">Daftar Kelulusan</a>
+                                <a href="./daftar-alumni.html">Daftar Alumni</a>
+                                <a href="./daftar-kelas.html">Daftar Nilai</a>
+                            </div>
+                        </li>
+                        <li><a href="./berita.html">Berita</a></li>
+                        <li><a href="./acara.html">Acara</a></li>
+                        <li><a href="./galeri.html">Galeri</a></li>
+                        <li><a href="./kritik-saran.html">Kritik & Saran</a></li>
+                        <li><a href="./kontak.html">Kontak</a></li>
+                        <li><a href="./login.html">Login</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="row" style="padding-top: 48px">
-            <div class="col">
-                <div class="row">
-                    <div class="col-5">
-                        <img src="assets/IMG_0937.JPG" alt="home-img" style="width: 480px" />
-                    </div>
-                    <div class="col">Sanggar Bintang Kejora</div>
+        <div class="title-class" style="padding: 15px;">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <img class="logo" src="assets/3588306944.png" alt="" />
+                </div>
+                <div class="col-6 home-title"> <br />
+                    <span class="title-school-text">Acara</span><br>
                 </div>
             </div>
         </div>
+        <div id="newsrow"></div>
     </div>
-    <script src="script.js"></script>
 </body>
 
 </html>
+
+<script>
+    window.onload = function() {
+        getService();
+    }
+
+    function getService() {
+        var trbody = document.getElementById("newsrow");
+        trbody.innerHTML = ``;
+        var uri = `http://localhost:8888/api/events`;
+        $.ajax({
+            type: "GET",
+            url: uri,
+            success: function(data) {
+                if (data.code == "200") {
+                    console.log(data.data);
+                    for (var i = 0; i < data.data.length; i++) {
+                        trbody.innerHTML += `        
+                        <div class="row" style="padding-top: 48px;padding:50px;">
+                            <div class="col" style="padding:15px;border:solid 1px white;">
+                                <div class="row">
+                                    <div class="col-5"><img style="max-width:320px;min-width:320px" src="assets/${data.data[i].imageName}" alt="" />
+                                </div>
+                                <div class="col">
+                                    <div class="row" style="font-size:18px;font-weight:bold">${data.data[i].title}</div><br>
+                                        <div class="row">${data.data[i].description}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                    }
+                }
+            }
+        })
+
+    }
+</script>

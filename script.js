@@ -1,9 +1,11 @@
 function toggleProfil() {
-  document.getElementById("dropdown-profil").classList.toggle("show");
+    document.getElementById("dropdown-profil").classList.toggle("show");
 }
+
 function toggleAkademik() {
-  document.getElementById("dropdown-akademik").classList.toggle("show");
+    document.getElementById("dropdown-akademik").classList.toggle("show");
 }
+
 
 // window.onclick = function (event) {
 //   if (!event.target.matches(".dropbtn")) {

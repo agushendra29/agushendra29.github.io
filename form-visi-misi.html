@@ -2,163 +2,251 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- CSS only -->
-  <link href="bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <!-- Include stylesheet -->
-  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
-  <title>Home</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Include stylesheet -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <title>Home</title>
 </head>
 
 <body>
-  <div class="row dashboard">
-    <div class="col-2 header-dashboard">
-      <div class="row">
-        <div class="col">
-          <div class="row logo-dashboard">
-            <div class="col">
-              <img class="logo" src="assets/3588306944.png" alt="" />
-              <div>SD INPRES ENDE 7</div>
+    <div class="row dashboard">
+        <div class="col-2 header-dashboard">
+            <div class="row">
+                <div class="col">
+                    <div class="row logo-dashboard">
+                        <div class="col">
+                            <img class="logo" src="assets/3588306944.png" alt="" />
+                            <div>SD INPRES ENDE 7</div>
+                        </div>
+                    </div>
+                    <div class="row user-dashboard">
+                        <div class="col" id="userslot">
+
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="row user-dashboard">
-            <div class="col">
-              Yohanes <br />
-              @admin
+            <div class="row menu-dashboard">
+                <ul>
+                    <li class="dashboard-item">
+                        <a href="./dashboard.html">
+                            <img src="assets/pngegg.png" class="icon" alt="icon-beranda" />Beranda
+                        </a>
+                    </li>
+                    <li class="dashboard-item">
+                        <a href="#" onclick="toggleProfil()">
+                            <img src="assets/pngegg (4).png" class="icon" alt="icon-profil" />Profil
+                        </a>
+                        <ul id="dropdown-profil">
+                            <li>
+                                <a href="./form-tentang-kami.html">
+                                    <img src="assets/pngegg (11).png" class="icon" alt="icon-tentang-kami" /> Tentang Kami
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-visi-misi.html">
+                                    <img src="assets/pngegg (12).png" class="icon" alt="icon-visi-misi" /> Visi & Misi
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-fasilitas.html">
+                                    <img src="assets/pngegg (14).png" class="icon" alt="icon-fasilitas" /> Fasilitas
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-tata-tertib.html">
+                                    <img src="assets/pngegg (13).png" class="icon" alt="icon-tata-tertib" /> Tata Tertib
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-prestasi.html">
+                                    <img src="assets/pngegg (15).png" class="icon" alt="icon-prestasi" /> Prestasi
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dashboard-item">
+                        <a href="#" onclick="toggleAkademik()">
+                            <img src="assets/pngegg (10).png" class="icon" alt="icon-akademik" />Akademik
+                        </a>
+                        <ul id="dropdown-akademik">
+                            <li>
+                                <a href="./form-data-siswa.html">
+                                    <img src="assets/icons8-user-account-30.png" class="icon" alt="icon-daftar-siswa" /> Daftar Siswa
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-data-kelulusan.html">
+                                    <img src="assets/icons8-list-60.png" class="icon" alt="icon-kelulusan" /> Daftar Kelulusan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-data-alumni.html">
+                                    <img src="assets/icons8-user-groups-50.png" class="icon" alt="icon-alumni" /> Daftar Alumni
+                                </a>
+                            </li>
+                            <li>
+                                <a href="./form-data-nilai.html">
+                                    <img src="assets/icons8-list-view-24.png" class="icon" alt="icon-nilai" /> Daftar Nilai
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dashboard-item">
+                        <a href="./form-data-berita.html">
+                            <img src="assets/Newspaper-icon.png" class="icon" alt="icon-guru" />Berita
+                        </a>
+                    </li>
+                    <li class="dashboard-item">
+                        <a href="./form-data-acara.html">
+                            <img src="assets/pngegg (13).png" class="icon" alt="icon-wali-kelas" />Acara
+                        </a>
+                    </li>
+                    <li class="dashboard-item">
+                        <a href="./form-data-galeri.html">
+                            <img src="assets/icons8-gallery-64.png" class="icon" alt="icon-wali-murid" />Galeri
+                        </a>
+                    </li>
+                    <li class="dashboard-item">
+                        <a href="./form-kritik-saran.html">
+                            <img src="assets/icons8-feedback-30.png" class="icon" alt="icon-siswa" />Kritik dan Saran
+                        </a>
+                    </li>
+
+                </ul>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="row menu-dashboard">
-        <ul>
-          <li class="dashboard-item">
-            <a href="/dashboard.html">
-              <img src="assets/pngegg.png" class="icon" alt="icon-beranda" />
-              Beranda
-            </a>
-          </li>
-          <li class="dashboard-item">
-            <a href="#" onclick="toggleProfil()">
-              <img src="assets/pngegg (4).png" class="icon" alt="icon-profil" />Profil
-            </a>
-            <ul id="dropdown-profil">
-              <li>
-                <a href="/form-tentang-kami.html">
-                  <img src="assets/pngegg (11).png" class="icon" alt="icon-tentang-kami" />
-                  Tentang Kami
-                </a>
-              </li>
-              <li>
-                <a href="form-visi-misi.html">
-                  <img src="assets/pngegg (12).png" class="icon" alt="icon-visi-misi" />
-                  Visi & Misi
-                </a>
-              </li>
-              <li>
-                <a href="form-fasilitas.html">
-                  <img src="assets/pngegg (14).png" class="icon" alt="icon-fasilitas" />
-                  Fasilitas
-                </a>
-              </li>
-              <li>
-                <a href="form-tata-tertib.html">
-                  <img src="assets/pngegg (13).png" class="icon" alt="icon-tata-tertib" />
-                  Tata Tertib
-                </a>
-              </li>
-              <li>
-                <a href="form-prestasi.html">
-                  <img src="assets/pngegg (15).png" class="icon" alt="icon-prestasi" />
-                  Prestasi
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="dashboard-item">
-            <a href="/form-data-guru.html">
-              <img src="assets/pngegg (5).png" class="icon" alt="icon-guru" />Guru
-            </a>
-          </li>
-          <li class="dashboard-item">
-            <a href="/form-data-wali-kelas.html">
-              <img src="assets/pngegg (9).png" class="icon" alt="icon-wali-kelas" />Wali Kelas
-            </a>
-          </li>
-          <li class="dashboard-item">
-            <a href="#">
-              <img src="assets/pngegg (8).png" class="icon" alt="icon-wali-murid" />Wali Murid
-            </a>
-          </li>
-          <li class="dashboard-item">
-            <a href="/form-data-siswa.html">
-              <img src="assets/pngegg (7).png" class="icon" alt="icon-siswa" />Siswa
-            </a>
-          </li>
-          <li class="dashboard-item">
-            <a href="#" onclick="toggleAkademik()">
-              <img src="assets/pngegg (10).png" class="icon" alt="icon-akademik" />Akademik
-            </a>
-            <ul id="dropdown-akademik">
-              <li>
-                <a href="/form-data-siswa.html">
-                  <img src="assets/icons8-user-account-30.png" class="icon" alt="icon-daftar-siswa" />
-                  Daftar Siswa
-                </a>
-              </li>
-              <li>
-                <a href="form-data-kelulusan.html">
-                  <img src="assets/icons8-list-60.png" class="icon" alt="icon-kelulusan" />
-                  Daftar Kelulusan
-                </a>
-              </li>
-              <li>
-                <a href="form-data-alumni.html">
-                  <img src="assets/icons8-user-groups-50.png" class="icon" alt="icon-alumni" />
-                  Daftar Alumni
-                </a>
-              </li>
-              <li>
-                <a href="form-data-nilai.html">
-                  <img src="assets/icons8-list-view-24.png" class="icon" alt="icon-nilai" />
-                  Daftar Nilai
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+        <div class="col-10 tentang-kami-dashboard">
+            <form onsubmit="btnSubmit()">
+                <div>
+                    <h3>Profil Visi & Misi</h3>
+                </div>
+                <div class="rtf-editor">
+                    <label for="deskripsi">Visi</label><br />
+
+                    <!-- Create the editor container -->
+                    <div id="editor"></div>
+
+                    <label for="deskripsi">Misi</label><br />
+
+                    <!-- Create the editor container -->
+                    <div id="editorMisi"></div>
+
+
+
+                    <!-- Include the Quill library -->
+                    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+                    <!-- Initialize Quill editor -->
+                    <script>
+                        var quill = new Quill("#editor", {
+                            theme: "snow",
+                        });
+                        var quill1 = new Quill("#editorMisi", {
+                            theme: "snow",
+                        });
+                    </script>
+                </div>
+                <div>
+                    <button class="button button-secondary" type="submit">Update</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="col-10 tentang-kami-dashboard">
-      <form action="">
-        <div>
-          <h3>Profil Visi & Misi</h3>
-        </div>
-        <div class="rtf-editor">
-          <label for="deskripsi">Deskripsi</label><br />
-
-          <!-- Create the editor container -->
-          <div id="editor"></div>
-
-          <!-- Include the Quill library -->
-          <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-          <!-- Initialize Quill editor -->
-          <script>
-            var quill = new Quill("#editor", {
-              theme: "snow",
-            });
-          </script>
-        </div>
-        <div>
-          <button class="button button-secondary">Update</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <script src="script.js"></script>
 </body>
 
 </html>
+<script>
+    var insertNew = true;
+    var id = ``;
+
+    function toggleProfil() {
+        document.getElementById("dropdown-profil").classList.toggle("show");
+    }
+
+    function toggleAkademik() {
+        document.getElementById("dropdown-akademik").classList.toggle("show");
+    }
+
+    function setValueBeforeSubmit() {
+        if (insertNew == false) {
+            {
+                return data = {
+                    mission: quill1.root.innerHTML,
+                    id: id,
+                    profileType: "Visi & Misi",
+                    vision: quill.root.innerHTML
+                };
+            }
+        } else {
+            return data = {
+                mission: quill1.root.innerHTML,
+                profileType: "Visi & Misi",
+                vision: quill.root.innerHTML
+            };
+        }
+    }
+
+    window.onload = function() {
+        checkUser();
+        getService();
+    }
+
+    function checkUser() {
+        var username = JSON.parse(JSON.stringify(localStorage.getItem('username')));
+        var role = JSON.parse(JSON.stringify(localStorage.getItem('role')));
+
+        document.getElementById("userslot").innerHTML = `${username}<br> ${role}`;
+        if (!username) {
+            window.location.href = "./login.html"
+        }
+    }
+
+    function getService() {
+        var uri = `http://localhost:8888/api/profiles/profileType/Visi & Misi`;
+        $.ajax({
+            type: "GET",
+            url: uri,
+            success: function(data) {
+                if (data.code == "200") {
+                    if (data.data[0][0].id) {
+                        console.log(data);
+                        insertNew = false;
+                        quill.root.innerHTML = data.data[0][0].Visi;
+                        quill1.root.innerHTML = data.data[0][0].Misi;
+                        id = data.data[0][0].id;
+                    }
+                }
+            }
+        })
+    }
+
+    function btnSubmit() {
+        event.preventDefault();
+        var mapData = setValueBeforeSubmit();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8888/api/profiles",
+            data: JSON.stringify(mapData),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: function(data) {
+                if (data.code) {
+                    if (data.code == "201") {
+                        alert(data.message);
+                        getService();
+                    }
+                }
+            }
+        })
+    }
+</script>

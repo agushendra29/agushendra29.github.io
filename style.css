@@ -7,7 +7,7 @@
 
 body {
     color: white;
-    background-color: cadetblue;
+    background-color: cadetblue !important;
 }
 
 .home {
@@ -84,16 +84,16 @@ body {
     text-align: center;
     background-color: whitesmoke;
     margin: 0 25%;
-    height: 360px;
-    padding: 80px;
+    height: 250px;
+    padding: 50px;
 }
 
 .icon {
-    width: 24px;
+    width: 20px;
 }
 
 .input-login {
-    font-size: 24px;
+    font-size: 16px;
     background-color: transparent;
     border: none;
     border-bottom: 1px solid black;
@@ -149,7 +149,7 @@ body {
 .menu-dashboard ul li {
     padding: 12px 18px;
     color: black;
-    font-size: 24px;
+    font-size: 14px;
 }
 
 .menu-dashboard ul li .icon {
@@ -177,7 +177,7 @@ body {
 }
 
 .tentang-kami-dashboard {
-    padding: 48px 96px;
+    padding: 48px 96px !important;
 }
 
 .tentang-kami-dashboard>form>div {
@@ -258,4 +258,36 @@ textarea {
 .title-school-text {
     font-weight: bold;
     font-size: 36px;
+}
+
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 18px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
+}
+
+.img-size {
+    min-width: 150px;
+    max-width: 150px;
+    max-height: 100px;
+    min-height: 100px;
 }

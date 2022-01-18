@@ -8,6 +8,9 @@
     <!-- CSS only -->
     <link href="bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <title>Home</title>
 </head>
 
@@ -34,7 +37,7 @@
                                 <a href="./daftar-siswa.html">Daftar Siswa</a>
                                 <a href="./daftar-kelulusan.html">Daftar Kelulusan</a>
                                 <a href="./daftar-alumni.html">Daftar Alumni</a>
-                                <a href="./#">Daftar Nilai</a>
+                                <a href="./daftar-kelas.html">Daftar Nilai</a>
                             </div>
                         </li>
                         <li><a href="./berita.html">Berita</a></li>
@@ -47,19 +50,54 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="padding-top: 48px">
-            <div class="col-5">
-                <img src="assets/IMG_0937.JPG" alt="home-img" style="width: 480px" />
+        <div class="title-class" style="padding: 15px;">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <img class="logo" src="assets/3588306944.png" alt="" />
+                </div>
+                <div class="col-6 home-title">
+                    <span class="title-text">Profil</span> <br />
+                    <span class="title-school-text">Tentang Kami</span><br>
+                </div>
             </div>
+        </div>
+        <div class="row" style="padding:45px 50px">
             <div class="col">
-                <h3>Sejarah Singkat</h3>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima error deleniti, corporis corrupti laborum vel dolorem praesentium accusantium dolore. Error sint, totam doloribus eos dolorem unde a quas eum illum?
+                <h3 class="text-center"><b id="title"></b></h3>
+                <p id="response">
                 </p>
+
+                <div class="text-center" id="imgsrc"></div>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
 
 </html>
+<script>
+    window.onload = function() {
+        getService();
+    }
+
+    function getService() {
+        var title = document.getElementById("title");
+        var body = document.getElementById("response");
+        var imagesrc = document.getElementById("imgsrc")
+        var index = 0;
+        body.innerHTML = ``;
+        imagesrc.innerHTML = ``;
+        var uri = `http://localhost:8888/api/profiles/profileType/Tentang Kami`;
+        $.ajax({
+            type: "GET",
+            url: uri,
+            success: function(data) {
+                if (data.code == "200") {
+                    console.log(data.data[0][0]);
+                    title.innerHTML = data.data[0][0].Title;
+                    body.innerHTML = data.data[0][0].Description;
+                    imagesrc.innerHTML = `<img src="assets/${data.data[0][0].ImageName}" alt="home-img" style="width: 480px" />`
+                }
+            }
+        })
+    }
+</script>

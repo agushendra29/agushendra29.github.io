@@ -2,38 +2,82 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- CSS only -->
-  <link href="bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link href="bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 
-<body style="padding-top: 150px">
-  <div class="header-login">
-    <img class="logo" src="assets/3588306944.png" alt="" />
-    <div>SD INPRES ENDE 7</div>
-  </div>
-  <div class="login-card">
-    <form action="/dashboard.html">
-      <div class="field">
-        <img src="assets/pngegg (1).png" class="icon" alt="" />
-        <input type="text" placeholder="Username" class="input-login" />
-      </div>
-      <div class="field">
-        <img src="assets/pngegg (2).png" class="icon" alt="" />
-        <input type="password" placeholder="Password" class="input-login" />
-      </div>
-      <div class="login-submit">
-        <span style="color: black"><input type="checkbox" name="Remember Me" id="" /> Remember
-          Me</span>
-        <button class="button button-primary">SIGN IN</button>
-      </div>
-    </form>
-  </div>
-  <script src="script.js"></script>
+<body style="padding: 25px">
+    <div class="header-login">
+        <img class="logo" src="assets/3588306944.png" alt="" />
+        <div>SD INPRES ENDE 7</div>
+    </div>
+    <div class="login-card">
+        <form onsubmit="btnLogin()">
+            <div class="field">
+                <input type="text" placeholder="Username" class="form-control" id="txtUsername" required/>
+            </div>
+            <div class="field">
+                <input type="password" placeholder="Password" class="form-control" id="txtPassword" required/>
+            </div>
+            <div class="row login-submit">
+                <div class="col-6 text-center">
+                    <a class="btn btn-secondary" href="./index.html">kembali beranda</a>
+                </div>
+                <div class="col-6 text-center ">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
+<script>
+    window.onload = function() {
+        localStorage.clear();
+    }
+
+    function btnLogin() {
+        onCheck();
+    }
+
+    function onCheck() {
+        var username = document.getElementById("txtUsername").value;
+        var password = document.getElementById("txtPassword").value;
+        event.preventDefault();
+        postLogin(username, password)
+    }
+
+    function postLogin(username, password) {
+        var urlLogin = "http://localhost:8888/api/users/login";
+        $.ajax({
+            type: "GET",
+            url: urlLogin,
+            data: {
+                username: username,
+                password: password
+            },
+            success: function(data) {
+                console.log(data);
+                if (data.code == "200") {
+                    alert(data.message)
+                    console.log(data);
+                    localStorage.setItem("username", data.data[0].name)
+                    localStorage.setItem("role", data.data[0].role)
+                    localStorage.setItem("id", data.data[0].id)
+                    window.location.href = "./dashboard.html"
+                } else {
+                    alert('Login Failed')
+                }
+
+            }
+        });
+    }
+</script>

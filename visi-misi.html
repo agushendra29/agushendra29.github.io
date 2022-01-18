@@ -8,6 +8,9 @@
     <!-- CSS only -->
     <link href="bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <title>Home</title>
 </head>
 
@@ -34,7 +37,7 @@
                                 <a href="./daftar-siswa.html">Daftar Siswa</a>
                                 <a href="./daftar-kelulusan.html">Daftar Kelulusan</a>
                                 <a href="./daftar-alumni.html">Daftar Alumni</a>
-                                <a href="./#">Daftar Nilai</a>
+                                <a href="./daftar-kelas.html">Daftar Nilai</a>
                             </div>
                         </li>
                         <li><a href="./berita.html">Berita</a></li>
@@ -47,35 +50,60 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="padding-top: 48px">
+        <div class="title-class" style="padding: 15px;">
+            <div class="row">
+                <div class="col-2 text-center">
+                    <img class="logo" src="assets/3588306944.png" alt="" />
+                </div>
+                <div class="col-6 home-title">
+                    <span class="title-text">Profil</span> <br />
+                    <span class="title-school-text">Visi & Misi</span><br>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding:45px 50px">
             <div class="col">
                 <h4>Visi</h4>
-                <p>
-                    "Terciptanya kepribadian yang beriman dan bertaqwa, cerdas dan terampil serta berkarakter budaya bangsa"
-                </p>
+                <p style="padding-left: 25px;" id="response"></p>
                 <h4>Misi</h4>
-                <ol style="padding-left: 25px;">
-                    <li>
-                        Mewujudkan warga sekolah yang beriman dan bertaqwa kepada Tuhan yang Maha Esa, santun, saling menghargai, jujur, disiplin, dan bertanggung jawab.
-                    </li>
-                    <li>Memotivasi siswa untuk berprestasi.</li>
-                    <li>
-                        Melaksanakan pembelajaran secara Aktif, Inovatif, Kreatif, Efektif, dan menyenangkan.
-                    </li>
-                    <li>Mengembangkan potensi siswa.</li>
-                    <li>Meningkatkan sikap sosial dari seluruh warga sekolah.</li>
-                    <li>
-                        Mewujudkan lingkungan sekolah yang aman, bersih, sehat, rapi, dan indah.
-                    </li>
-                    <li>Mengembangkan jiwa seni budaya serta kesetiakawanan.</li>
-                    <li>
-                        Melaksanakan kerjasama antara keluarga, sekolah, dan masyarakat dalam upaya pemerataan dan peningkatan mutu pendidikan
-                    </li>
-                </ol>
+                <p style="padding-left: 25px;" id="response1">
+                </p>
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
 
 </html>
+
+<script>
+    window.onload = function() {
+        getService();
+    }
+
+    function getService() {
+        var body = document.getElementById("response");
+        var body1 = document.getElementById("response1");
+        var index = 0;
+        body.innerHTML = ``;
+        body1.innerHTML = ``;
+        var uri = `http://localhost:8888/api/profiles`;
+        $.ajax({
+            type: "GET",
+            url: uri,
+            success: function(data) {
+                if (data.code == "200") {
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].profileType == "Visi & Misi") {
+                            index = i;
+                            break;
+                        }
+                    }
+                    body.innerHTML = data.data[index].vision
+                    body1.innerHTML = data.data[index].mission
+                    console.log(data.data);
+                }
+            }
+        })
+
+    }
+</script>
