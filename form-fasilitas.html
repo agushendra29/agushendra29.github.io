@@ -266,8 +266,6 @@
 
     function onSave() {
         var val = setValueBeforeSubmit();
-        event.preventDefault();
-        var mapData = setValueBeforeSubmit();
         $.ajax({
             type: "POST",
             url: "http://localhost:8888/api/profiles",

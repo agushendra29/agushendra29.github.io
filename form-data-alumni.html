@@ -161,10 +161,63 @@
             </form>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Alumni</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body" style="margin:15px">
+                    <div class="row">
+                        Nama
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="txtName" placeholder="input Nama">
+                    </div>
+                    <div class="row" style="padding-top:15px;">
+                        Gender
+                    </div>
+                    <div class="row">
+                        <select name="gender" id="gender" class="form-control">
+                            <option value="L">Pria</option>
+                            <option value="P">Wanita</option>
+                          </select>
+                    </div>
+                    <div class="row" style="padding-top:15px;">
+                        Tahun lulus
+                    </div>
+                    <div class="row">
+                        <input type="number" class="form-control" id="txtYear" placeholder="input tahun">
+                    </div>
+
+                    <div class="row" style="padding-top:15px;">
+                        Pendidikan terakhir
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="txtEdu" placeholder="input pendidikan terakhir">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="onSave()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
 <script>
+    var rowId = "";
+    var nama = document.getElementById("txtName");
+    var gender = document.getElementById("gender");
+    var pendidikan = document.getElementById("txtEdu");
+    var year = document.getElementById("txtYear");
+    var nis = "";
+
     function toggleProfil() {
         document.getElementById("dropdown-profil").classList.toggle("show");
     }
@@ -224,6 +277,63 @@
         })
     }
 
+    function editRow(id) {
+        getById(id);
+        $(`#exampleModal`).modal(`show`);
+    }
+
+    function setValueBeforeSubmit() {
+        return data = {
+            gender: gender.value,
+            graduationYear: year.value,
+            id: rowId,
+            name: nama.value,
+            nis: nis,
+            lastEducation: pendidikan.value
+        }
+    }
+
+    function onSave() {
+        var val = setValueBeforeSubmit();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8888/api/alumnis",
+            data: JSON.stringify(val),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: function(data) {
+                if (data.code) {
+                    if (data.code == "201") {
+                        alert(data.message);
+                        $(`#exampleModal`).modal(`hide`);
+                        getService();
+                    }
+                }
+            }
+        })
+    }
+
+    function getById(id) {
+        var uri = `http://localhost:8888/api/alumnis/${id}`;
+        $.ajax({
+            type: "GET",
+            url: uri,
+            success: function(data) {
+                if (data.code == "200") {
+                    rowId = data.data[0].id
+                    nama.value = data.data[0].name
+                    gender.value = data.data[0].gender
+                    year.value = data.data[0].graduationYear
+                    pendidikan.value = data.data[0].lastEducation
+                    nis = data.data[0].nis
+                }
+            }
+        })
+    }
+
+
 
     function getService() {
         var trbody = document.getElementById("trcol");
@@ -244,7 +354,7 @@
                                 <td>${arr[i].graduationYear}</td>
                                 <td>${arr[i].lastEducation}</td>
                                 <td>
-                                    <a href="#"><img src="assets/icons8-edit-24.png" alt="" class="icon" /></a>
+                                    <a onclick=editRow('${arr[i].id}')><img src="assets/icons8-edit-24.png" alt="" class="icon" /></a>
                                     <a onclick=deleteRow('${arr[i].id}')><img src="assets/icons8-remove-24.png" alt="" class="icon" style="margin-left: 12px" /></a>
                                 </td>
                             </tr>`

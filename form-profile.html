@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <title>Home</title>
 </head>
 
@@ -127,213 +128,63 @@
         </div>
         <div class="col-10 tentang-kami-dashboard">
             <div>
-                <h3>Profil Prestasi</h3>
+                <h3>Profile</h3>
             </div>
             <div class="row">
+                <div class="col-2" style="padding-top:5px">username</div>
                 <div class="col-6">
-                    <button class="button button-secondary" data-toggle="modal" data-target="#exampleModal" onclick="onModal()">+ Profil Prestasi</button>
-                </div>
-                <div class="col-6" style="text-align: right">
-                    <button class="button button-secondary">
-              <img src="assets/icons8-refresh-30.png" alt="" /> Refresh
-            </button>
+                    <input type="text" class="form-control" placeholder="Username" id="txtUsername" disabled/>
                 </div>
             </div>
-            <div>
-                <table class="table table-striped table-light">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Judul</th>
-                            <th scope="col">Kategori</th>
-                            <th scope="col">Tanggal Input</th>
-                            <th scope="col">Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="colprestasi">
-                    </tbody>
-                </table>
+            <div class="row" style="padding-top:15px">
+                <div class="col-2" style="padding-top:5px">name</div>
+                <div class="col-6">
+                    <input type="text" class="form-control" placeholder="Username" id="txtName" disabled/>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Profil</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="row" style="padding-top:15px">
+                <div class="col-2" style="padding-top:5px">Role</div>
+                <div class="col-6">
+                    <input type="text" class="form-control" placeholder="Username" id="role" disabled/>
                 </div>
-                <div class="modal-body" style="margin:15px">
-                    <div class="row">
-                        Judul
-                    </div>
-                    <div class="row">
-                        <input type="text" class="form-control" id="txtJudul" placeholder="input judul">
-                    </div>
-
-                    <div class="row" style="padding-top:15px;">
-                        Kategori
-                    </div>
-                    <div class="row">
-                        <input type="text" class="form-control" id="txtKategori" placeholder="input kategori">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="onSave()">Save changes</button>
+            </div>
+            <div class="row" style="padding-top:15px">
+                <div class="col-2" style="padding-top:5px">Created Date</div>
+                <div class="col-6">
+                    <input type="text" class="form-control" placeholder="Username" id="createdDate" disabled/>
                 </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
 
+
 <script>
-    var rowId = ``;
-    var judul = document.getElementById("txtJudul");
-    var kategori = document.getElementById("txtKategori");
-    var isNew = true;
-    var username = JSON.parse(JSON.stringify(localStorage.getItem('username')));
-
-    function toggleProfil() {
-        document.getElementById("dropdown-profil").classList.toggle("show");
-    }
-
-    function toggleAkademik() {
-        document.getElementById("dropdown-akademik").classList.toggle("show");
-    }
-
+    var rowId = JSON.parse(JSON.stringify(localStorage.getItem('id')));
+    var user = document.getElementById("txtUsername");
+    var name = document.getElementById("txtName");
+    var roleVal = document.getElementById("role");
+    var created = document.getElementById("createdDate");
     window.onload = function() {
-        checkUser();
-        getService();
+        getById();
     }
 
-    function checkUser() {
-        var username = JSON.parse(JSON.stringify(localStorage.getItem('username')));
-        var role = JSON.parse(JSON.stringify(localStorage.getItem('role')));
-
-        document.getElementById("userslot").innerHTML = `${username}<br> ${role}`;
-        if (!username) {
-            window.location.href = "./login.html"
-        }
-    }
-
-    function setValueBeforeSubmit() {
-        const timeElapsed = Date.now();
-        const today = new Date(timeElapsed);
-        console.log(today);
-        if (isNew == false) {
-            return data = {
-                id: rowId,
-                profileType: "Prestasi",
-                title: judul.value,
-                category: kategori.value
-
-            }
-        } else {
-            return data = {
-                createdBy: username,
-                createdDate: today,
-                profileType: "Prestasi",
-                title: judul.value,
-                category: kategori.value
-            }
-        }
-    }
-
-    function onModal(data) {
-        isNew = true;
-        judul.value = ``;
-        kategori.value = ``;
-    }
-
-    function editRow(id) {
-        getById(id);
-        isNew = false;
-        $(`#exampleModal`).modal(`show`);
-    }
-
-    function deleteRow(id) {
-        console.log(id);
-        var uri = `http://localhost:8888/api/profiles/${id}`;
-        $.ajax({
-            type: "DELETE",
-            url: uri,
-            success: function(data) {
-                if (data.code) {
-                    alert(data.message);
-                    getService();
-                }
-            }
-        })
-    }
-
-    function onSave() {
-        var val = setValueBeforeSubmit();
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8888/api/profiles",
-            data: JSON.stringify(val),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            success: function(data) {
-                if (data.code) {
-                    if (data.code == "201") {
-                        alert(data.message);
-                        $(`#exampleModal`).modal(`hide`);
-                        getService();
-                    }
-                }
-            }
-        })
-    }
-
-    function getById(id) {
-        var uri = `http://localhost:8888/api/profiles/${id}`;
+    function getById() {
+        var uri = `http://localhost:8888/api/users/${rowId}`;
         $.ajax({
             type: "GET",
             url: uri,
             success: function(data) {
                 if (data.code == "200") {
-                    rowId = data.data[0].id
-                    judul.value = data.data[0].title
-                    kategori.value = data.data[0].category
+                    var arr = data.data[0];
+                    console.log(arr);
+                    user.value = arr.username
+                    name.value = arr.name
+                    roleVal.value = arr.role
+                    created.value = arr.createdDate
                 }
             }
         })
-    }
-
-    function getService() {
-        var trbody = document.getElementById("colprestasi");
-        trbody.innerHTML = ``;
-        var uri = `http://localhost:8888/api/profiles/profileType/Prestasi`;
-        $.ajax({
-            type: "GET",
-            url: uri,
-            success: function(data) {
-                if (data.code == "200") {
-                    console.log(data.data[0]);
-                    var arr = data.data[0]
-                    for (var i = 0; i < arr.length; i++) {
-                        trbody.innerHTML += ` <tr>
-                                <th scope="row">${i + 1}</th>
-                                <td>${arr[i].Title}</td>
-                                <td>${arr[i].Category}</td>
-                                <td>${arr[i].InputDate}</td>
-                                <td>
-                                    <a onclick=editRow('${arr[i].id}')><img src="assets/icons8-edit-24.png" alt="" class="icon" /></a>
-                                    <a onclick=deleteRow('${arr[i].id}')><img src="assets/icons8-remove-24.png" alt="" class="icon" style="margin-left: 12px" /></a>
-                                </td>
-                            </tr>`
-                    }
-                }
-            }
-        })
-
     }
 </script>

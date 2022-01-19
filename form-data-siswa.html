@@ -149,6 +149,7 @@
                             <th scope="col">Nama</th>
                             <th scope="col">Jenis Kelamin</th>
                             <th scope="col">Wali Kelas</th>
+                            <th scope="col">Wali Murid</th>
                             <th scope="col">Opsi</th>
                         </tr>
                     </thead>
@@ -159,11 +160,56 @@
 
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Siswa</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body" style="margin:15px">
+                    <div class="row">
+                        Nama
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="txtName" placeholder="input Nama">
+                    </div>
+                    <div class="row" style="padding-top:15px;">
+                        Gender
+                    </div>
+                    <div class="row">
+                        <select name="gender" id="gender" class="form-control">
+                            <option value="L">Pria</option>
+                            <option value="P">Wanita</option>
+                          </select>
+                    </div>
+                    <div class="row" style="padding-top:15px;">
+                        Wali murid
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="txtWali" placeholder="input Wali murid">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="onSave()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
 
 <script>
+    var rowId = "";
+    var gender = document.getElementById("gender");
+    var nama = document.getElementById("txtName");
+    var wali = document.getElementById("txtWali");
+    var nis = "";
+
     function toggleProfil() {
         document.getElementById("dropdown-profil").classList.toggle("show");
     }
@@ -223,6 +269,63 @@
         })
     }
 
+    function editRow(id) {
+        getById(id);
+        $(`#exampleModal`).modal(`show`);
+    }
+
+    function getById(id) {
+        var uri = `http://localhost:8888/api/students/${id}`;
+        $.ajax({
+            type: "GET",
+            url: uri,
+            success: function(data) {
+                if (data.code == "200") {
+                    rowId = data.data[0].id
+                    nama.value = data.data[0].name
+                    gender.value = data.data[0].gender
+                    wali.value = data.data[0].guardian
+                    nis = data.data[0].nis
+                }
+            }
+        })
+    }
+
+    function setValueBeforeSubmit() {
+        return data = {
+            gender: gender.value,
+            guardian: wali.value,
+            id: rowId,
+            name: nama.value,
+            nis: nis,
+            teacher: {
+                id: JSON.parse(JSON.stringify(localStorage.getItem('id')))
+            }
+        }
+    }
+
+    function onSave() {
+        var val = setValueBeforeSubmit();
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8888/api/students",
+            data: JSON.stringify(val),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: function(data) {
+                if (data.code) {
+                    if (data.code == "201") {
+                        alert(data.message);
+                        $(`#exampleModal`).modal(`hide`);
+                        getService();
+                    }
+                }
+            }
+        })
+    }
+
     function getService() {
         var trbody = document.getElementById("trcol");
         trbody.innerHTML = ``;
@@ -240,8 +343,9 @@
                                 <td>${arr[i].name}</td>
                                 <td>${arr[i].gender}</td>
                                 <td>${arr[i].teacher.name}</td>
+                                <td>${arr[i].guardian}</td>
                                 <td>
-                                    <a href="#"><img src="assets/icons8-edit-24.png" alt="" class="icon" /></a>
+                                    <a onclick=editRow('${arr[i].id}')><img src="assets/icons8-edit-24.png" alt="" class="icon" /></a>
                                     <a onclick=deleteRow('${arr[i].id}')><img src="assets/icons8-remove-24.png" alt="" class="icon" style="margin-left: 12px" /></a>
                                 </td>
                             </tr>`
